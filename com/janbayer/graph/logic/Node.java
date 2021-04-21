@@ -20,4 +20,9 @@ public class Node {
     public boolean getVisited() {
         return visited;
     }
+
+    @Override
+    public String toString() {
+        return "[Node: name=" + name + " visited=" + visited + "]";
+    }
 }

@@ -70,7 +70,8 @@ public class Launcher {
 
         JButton getEdgesButton = new JButton("Get Edges of Node");
 
-        JButton printEdgesButton = new JButton("Print a Edges");
+        JButton printEdgesButton = new JButton("Print all Edges");
+        JButton depthFirstSearchButton = new JButton("Depth First Search");
 
         JPanel panel = new JPanel();
         JPanel buttonPanel = new JPanel();
@@ -114,6 +115,8 @@ public class Launcher {
                     JOptionPane.showMessageDialog(frame, "The Edges the Node '" + name + "' is connected to are:\n" + edges, "Output of the Edges", JOptionPane.INFORMATION_MESSAGE);
                 } else if (source.equals(printEdgesButton)) {
                     highways.printEdges();
+                } else if (source.equals(depthFirstSearchButton)) {
+                    highways.initBredthFirstSearch("N");
                 }
 
             }
@@ -130,6 +133,8 @@ public class Launcher {
 
         printEdgesButton.addActionListener(l);
 
+        depthFirstSearchButton.addActionListener(l);
+
         JLabel label = new JLabel("This is a GUI only for testing purposes. You may experiment with adding nodes and edges");
 
         panel.add(label, BorderLayout.NORTH);
@@ -141,6 +146,8 @@ public class Launcher {
         buttonPanel.add(getEdgesButton);
 
         buttonPanel.add(printEdgesButton);
+
+        buttonPanel.add(depthFirstSearchButton);
 
         panel.add(buttonPanel, BorderLayout.SOUTH);
 

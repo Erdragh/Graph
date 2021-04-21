@@ -1,5 +1,7 @@
 package com.janbayer.graph.logic;
 
+import java.util.ArrayList;
+
 public class Graph {
     private int[][] edges; // Die Adjazenzmatrix
     private Node[] nodes; // Das Feld mit den Knoten hier als Strings der Ortsnamen
@@ -104,6 +106,19 @@ public class Graph {
 
         return out;
     }
+    public String getEdges(int index) {
+        if (index <= -1) {
+            System.err.println("The node doesn't exist");
+            return "ERROR, node does not exist";
+        }
+        String out = "";
+        for (int i = 0; i < edges.length; i++) {
+            System.out.println(edges[index][i]);
+            out += edges[index][i] + ", " ;
+        }
+
+        return out;
+    }
 
     public void initDepthFirstSearch(String start) {
         int index = getIndex(start);
@@ -123,6 +138,44 @@ public class Graph {
                 depthFirstSearch(i);
             }
         }
+    }
+
+    public void initBredthFirstSearch(String start) {
+        int index = getIndex(start);
+        ArrayList<Node> todo = new ArrayList();
+        for (Node n : nodes) {
+            if (n != null) {
+                n.setVisited(false);
+            }
+        }
+        todo.add(nodes[index]);
+        while (todo.size() > 0) {
+            todo = bredthFirstSearch(getIndex(todo.get(0).getName()), todo);
+            todo.remove(0);
+        }
+    }
+
+    private ArrayList<Node> bredthFirstSearch(int index, ArrayList<Node> todo) {
+        System.out.println("\nInitiating BFS for Node " + index + ": " + nodes[index]);
+        if (!nodes[index].getVisited()) {
+            nodes[index].setVisited(true);
+            int[] edgesOfIndex = edges[index];
+            for (int i = 0; i < edgesOfIndex.length; i++) {
+                if (edgesOfIndex[i] > 0 && !nodes[i].getVisited()) {
+                    if (!todo.contains(nodes[i])) {
+                        todo.add(nodes[i]);
+                        System.out.println("Node " + i + ": " + nodes[i] + " was added to the ToDo list.");
+                    } else {
+                        System.out.println("Node " + i + ": " + nodes[i] + " is already in the ToDo list.");
+                    }
+                } else if (edgesOfIndex[i] > 0) {
+                    System.out.println("Node " + i + ": " + nodes[i] + " was already visited.");
+                }
+            }
+        } else {
+            System.out.println("Node already visited");
+        }
+        return todo;
     }
 
     public void printEdges() {
