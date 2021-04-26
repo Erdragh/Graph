@@ -142,7 +142,7 @@ public class Graph {
 
     public void initBredthFirstSearch(String start) {
         int index = getIndex(start);
-        ArrayList<Node> todo = new ArrayList();
+        ArrayList<Node> todo = new ArrayList<Node>();
         for (Node n : nodes) {
             if (n != null) {
                 n.setVisited(false);
