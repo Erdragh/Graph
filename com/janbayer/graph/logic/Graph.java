@@ -150,12 +150,12 @@ public class Graph {
         }
         todo.add(nodes[index]);
         while (todo.size() > 0) {
-            todo = bredthFirstSearch(getIndex(todo.get(0).getName()), todo);
+            bredthFirstSearch(getIndex(todo.get(0).getName()), todo);
             todo.remove(0);
         }
     }
 
-    private ArrayList<Node> bredthFirstSearch(int index, ArrayList<Node> todo) {
+    private void bredthFirstSearch(int index, ArrayList<Node> todo) {
         System.out.println("\nInitiating BFS for Node " + index + ": " + nodes[index]);
         if (!nodes[index].getVisited()) {
             nodes[index].setVisited(true);
@@ -175,7 +175,7 @@ public class Graph {
         } else {
             System.out.println("Node already visited");
         }
-        return todo;
+        // return todo;
     }
 
     public void printEdges() {
