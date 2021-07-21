@@ -92,7 +92,7 @@ public class Graph {
         edges[index2][index1] = -1;
     }
 
-    public String getEdges(String name) {
+    public int[] getEdges(String name) {
         int index = getIndex(name);
         if (index <= -1) {
             System.err.println("The node doesn't exist");
@@ -106,17 +106,18 @@ public class Graph {
 
         return out;
     }
-    public String getEdges(int index) {
+    public int[] getEdges(int index) {
         if (index <= -1) {
             System.err.println("The node doesn't exist");
-            return "ERROR, node does not exist";
+            return null;
         }
-        String out = "";
+        int[] out = new int[edges.length*2];
         for (int i = 0; i < edges.length; i++) {
             System.out.println(edges[index][i]);
-            out += edges[index][i] + ", " ;
+            out[i*2] = i;
+            out[i*2+1] = edges[index][i];
         }
-
+        
         return out;
     }
 
@@ -176,6 +177,29 @@ public class Graph {
             System.out.println("Node already visited");
         }
         // return todo;
+    }
+
+    public void initDijkstra(String start, String end) {
+        for (Node n : nodes) {
+            n.setVisited(false);
+            n.setDistance(-1);
+            n.setPrev(null);
+        }
+
+        int iStart = getIndex(start);
+        int iEnd = getIndex(end);
+        Node nStart = nodes[iStart];
+        Node nEnd = nodes[iEnd];
+
+        int[] edges = getEdges(iStart);
+
+        Node shortest = null;
+
+        for (int i = 0; i < edges.length; i++) {
+            if (edges[i+1] < shortest.getDistance()) shortest = nodes[edges[i]];
+            shortest.setPrev(nStart);
+            shortest.setDistance(edges[i+1]);
+        }
     }
 
     public void printEdges() {

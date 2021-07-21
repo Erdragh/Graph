@@ -3,6 +3,8 @@ package com.janbayer.graph.logic;
 public class Node {
     private String name;
     private boolean visited;
+    private int distance;
+    private Node prev;
 
     public Node(String name) {
         this.name = name;
@@ -19,6 +21,22 @@ public class Node {
 
     public boolean getVisited() {
         return visited;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public Node getPrev() {
+        return prev;
+    }
+
+    public void setPrev(Node prev) {
+        this.prev = prev;
     }
 
     @Override

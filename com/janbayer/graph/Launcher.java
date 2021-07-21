@@ -111,7 +111,7 @@ public class Launcher {
                     String name = JOptionPane.showInputDialog(frame, "Input the name of the node.\nPress Cancel or leave empty and press enter to cancel.");
                     if (name == null) return;
                     if (name.equals("")) return;
-                    String edges = highways.getEdges(name);
+                    int[] edges = highways.getEdges(name);
                     JOptionPane.showMessageDialog(frame, "The Edges the Node '" + name + "' is connected to are:\n" + edges, "Output of the Edges", JOptionPane.INFORMATION_MESSAGE);
                 } else if (source.equals(printEdgesButton)) {
                     highways.printEdges();
